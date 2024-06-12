@@ -4,6 +4,7 @@ import com.bikkadit.demo.model.User;
 import com.bikkadit.demo.repository.UserRepository;
 import com.bikkadit.demo.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,13 +33,21 @@ public class UserServiceImpl implements UserServiceI {
 
     @Override
     public User getsingleUser(Long UserId) {
-        userRepository.findById(UserId);
-        return null;
+        Optional<User> user = userRepository.findById(UserId);
+
+        if(user.isPresent()){
+            return user.get();
+        }else {
+            throw new RuntimeException("ResourcesNotFoundException" + user);
+
+        }
+
     }
 
     @Override
     public List<User> getAllUser() {
-        return null;
+        List<User>  alluser = userRepository.findAll();
+        return alluser;
     }
 
     @Override
