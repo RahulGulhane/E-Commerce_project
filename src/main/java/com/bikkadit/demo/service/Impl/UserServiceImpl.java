@@ -15,12 +15,13 @@ public class UserServiceImpl implements UserServiceI {
 
     @Autowired
     private UserRepository userRepository;
+    //create User
     @Override
     public User createUser(User user) {
         User saveUser = userRepository.save(user);
         return saveUser;
     }
-
+        //update User
     @Override
     public User updateUser(User user, Long userId) {
         User user1 = userRepository.findById(userId).get();
@@ -30,28 +31,33 @@ public class UserServiceImpl implements UserServiceI {
         User updateUser = userRepository.save(user1);
         return updateUser;
     }
-
+        //GET single data
     @Override
-    public User getsingleUser(Long UserId) {
-        Optional<User> user = userRepository.findById(UserId);
+    public User getsingleUser(Long userId) {
 
-        if(user.isPresent()){
-            return user.get();
-        }else {
-            throw new RuntimeException("ResourcesNotFoundException" + user);
-
-        }
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Resources Not Found on Server"+ userId));
+        return user;
+        /* OR */
+//        Optional<User> user = userRepository.findById(userId);
+//
+//        if(user.isPresent()){
+//            return user.get();
+//        }else {
+//            throw new Exception("Resources Not Found on Server" + userId);
+//
+//        }
 
     }
-
+    //GET all data
     @Override
     public List<User> getAllUser() {
         List<User>  alluser = userRepository.findAll();
         return alluser;
     }
-
+        //Delete User
     @Override
-    public void deleteUser(Long UserId) {
-
+    public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException(("Resource Not Found on server" + userId)));
+        userRepository.delete(user);
     }
 }
