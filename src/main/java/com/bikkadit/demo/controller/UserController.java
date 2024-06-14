@@ -47,6 +47,4 @@ public class UserController {
         userServiceI.deleteUser(userId);
         return new ResponseEntity<>("Resource Delete Successful ",HttpStatus.OK);
     }
-
-
 }
