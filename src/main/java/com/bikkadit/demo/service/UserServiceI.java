@@ -9,7 +9,8 @@ public interface UserServiceI {
     User createUser(User user);
 
     //update
-    User updateUser(User user, Long userId);
+    User
+    updateUser(User user, Long userId);
 
     //GET single data
 

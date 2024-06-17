@@ -26,9 +26,9 @@ public class UserController {
     @PostMapping("/Users")
     public ResponseEntity<User> create(User user){
         logger.info("Entering the request for save user data");
-        User saveuser = userServiceI.createUser(user);
+        User saveduser = userServiceI.createUser(user);
         logger.info("compete the request for save user data");
-        return new ResponseEntity<>(saveuser, HttpStatus.CREATED);
+        return new ResponseEntity<>(saveduser, HttpStatus.CREATED);
     }
 //    @PostMapping("/Users")
 //    ResponseEntity<User> createUser(User user){
@@ -52,10 +52,10 @@ public class UserController {
 //    }
     //GET single user
     @GetMapping("/users/{UsersId}")
-    public ResponseEntity<User> getsinglUser(@PathVariable Long userId){
+    public ResponseEntity<User> getsingleUser(@PathVariable Long userId){
         logger.info("Entering the request for getsingleuser data with userId {}:",userId);
         User user1 = userServiceI.getsingleUser(userId);
-        logger.info("Completed the request for getsingluser data with  userId {}:",userId);
+        logger.info("Completed the request for getsingleuser data with  userId {}:",userId);
         return new ResponseEntity<>(user1, HttpStatus.OK);
     }
 
@@ -80,7 +80,7 @@ public class UserController {
     //Delete
     @DeleteMapping("/users/{UserId}")
     public ResponseEntity Delete(Long userId){
-        ogger.info("Entering the request for delete for delete the user data with userId {}:",userId);
+        logger.info("Entering the request for delete for delete the user data with userId {}:",userId);
         userServiceI.deleteUser(userId);
         logger.info("Completed the request for delete with  userId {}:",userId);
         return ResponseEntity.status(HttpStatus.OK).body("Resource Delete Successful");
